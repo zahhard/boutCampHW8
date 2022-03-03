@@ -42,13 +42,11 @@ class MainActivity2 : AppCompatActivity() {
             editor.clear()
             editor.apply()
 
+
+
             val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("name", binding.textView.text)
-            intent.putExtra("code", binding.textView.text)
-            intent.putExtra("place", binding.textView.text)
-            intent.putExtra("address", binding.textView.text)
-            intent.putExtra("post", binding.textView.text)
             startActivity(intent)
+            Remember.isRemember = false
             finish()
 
         }

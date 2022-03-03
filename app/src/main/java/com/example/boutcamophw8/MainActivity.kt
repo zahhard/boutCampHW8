@@ -8,10 +8,13 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.boutcamophw8.databinding.ActivityMainBinding
 
+object Remember{
+    var isRemember = false
+}
+
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var sharedPreferences: SharedPreferences
-    var isRemember = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,19 +24,22 @@ class MainActivity : AppCompatActivity() {
 
         sharedPreferences = getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
 
-        isRemember = sharedPreferences.getBoolean("CHECKED", false)
+        Remember.isRemember = sharedPreferences.getBoolean("CHECKED", false)
 
-        if (isRemember) {
+        if (Remember.isRemember) {
 
             val intent = Intent(this, MainActivity2::class.java)
             startActivity(intent)
             finish()
         }
-        else{
 
-
+        if (!Remember.isRemember){
+            binding.myEditTextName.setText(sharedPreferences.getString("NAME", ""))
+            binding.myEditTextCode.setText(sharedPreferences.getString("CODE", ""))
+            binding.myEditTextBirth.setText(sharedPreferences.getString("BIRTHPLACE", ""))
+            binding.myEditText1.setText(sharedPreferences.getString("ADDRESS", ""))
+            binding.myEditTextPost.setText(sharedPreferences.getString("POSTCODE", ""))
         }
-
 
             binding.button.setOnClickListener {
                 codeTypeCheck()
@@ -41,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
                 if (!codeTypeCheck() || !checkEmptyView()) {
 
-                    isRemember = true
+                    Remember.isRemember = true
 
                     val editor: SharedPreferences.Editor = sharedPreferences.edit()
                     editor.putString("NAME", binding.myEditTextName.text.toString())
