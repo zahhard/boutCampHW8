@@ -9,4 +9,6 @@
     <string name="woman">زن</string>
     <string name="man">مرد</string>
     <string name="regester">ثبت اطلاعات</string>
+    <string name="edit">تغییر اطلاعات</string>
+    <string name="logout">ورود کاربر جدید</string>
 </resources>
