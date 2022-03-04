@@ -10,7 +10,7 @@ import com.example.boutcamophw8.databinding.ActivityMain2Binding
 class MainActivity2 : AppCompatActivity() {
 
     lateinit var ppreferences: SharedPreferences
-    lateinit var binding : ActivityMain2Binding
+    lateinit var binding: ActivityMain2Binding
     var isRemember = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,30 +26,23 @@ class MainActivity2 : AppCompatActivity() {
         binding.textView4.text = ppreferences.getString("BIRTHPLACE", "")
         binding.textView5.text = ppreferences.getString("ADDRESS", "")
         binding.textView6.text = ppreferences.getString("POSTCODE", "")
+        binding.textView7.text = ppreferences.getString("GENDER", "")
 
         binding.button3.setOnClickListener {
-            val editor : SharedPreferences.Editor = ppreferences.edit()
+            val editor: SharedPreferences.Editor = ppreferences.edit()
             editor.clear()
             editor.apply()
 
-           val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
 
         binding.button2.setOnClickListener {
-            val editor : SharedPreferences.Editor = ppreferences.edit()
-            editor.clear()
-            editor.apply()
-
-
-
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             Remember.isRemember = false
             finish()
-
         }
     }
-
 }
