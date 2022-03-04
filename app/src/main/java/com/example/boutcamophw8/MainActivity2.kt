@@ -32,7 +32,7 @@ class MainActivity2 : AppCompatActivity() {
             val editor: SharedPreferences.Editor = ppreferences.edit()
             editor.clear()
             editor.apply()
-
+            Remember.isRemember = false
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
@@ -40,8 +40,8 @@ class MainActivity2 : AppCompatActivity() {
 
         binding.button2.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
             Remember.isRemember = false
+            startActivity(intent)
             finish()
         }
     }

@@ -21,34 +21,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
         sharedPreferences = getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
 
-        Remember.isRemember = sharedPreferences.getBoolean("CHECKED", false)
-
        if (Remember.isRemember) {
-
             val intent = Intent(this, MainActivity2::class.java)
             startActivity(intent)
             finish()
         }
-
-//
-//        if (!Remember.isRemember){
-//            binding.myEditTextName.setText(sharedPreferences.getString("NAME", ""))
-//            binding.myEditTextCode.setText(sharedPreferences.getString("CODE", ""))
-//            binding.myEditTextBirth.setText(sharedPreferences.getString("BIRTHPLACE", ""))
-//            binding.myEditText1.setText(sharedPreferences.getString("ADDRESS", ""))
-//            binding.myEditTextPost.setText(sharedPreferences.getString("POSTCODE", ""))
-//        }
 
             binding.button.setOnClickListener {
                 codeTypeCheck()
                 checkEmptyView()
 
                 if (!codeTypeCheck() && !checkEmptyView()) {
-
-                    Remember.isRemember = true
 
                     val editor: SharedPreferences.Editor = sharedPreferences.edit()
                     editor.putString("NAME", binding.myEditTextName.text.toString())
@@ -67,6 +52,8 @@ class MainActivity : AppCompatActivity() {
                     editor.putBoolean("CHECKED", true)
                     editor.apply()
 
+                    Remember.isRemember = true
+
                     Toast.makeText(this, "shared successfully", Toast.LENGTH_SHORT).show()
 
                     val intent = Intent(this, MainActivity2::class.java)
@@ -84,8 +71,7 @@ class MainActivity : AppCompatActivity() {
         if (sharedPreferences.contains("BIRTHPLACE"))
             binding.myEditTextBirth.setText(sharedPreferences.getString("BIRTHPLACE", ""))
         if (sharedPreferences.contains("ADDRESS"))
-            binding.myEditText1.setText(sharedPreferences.getString("female", ""))
-
+            binding.myEditText1.setText(sharedPreferences.getString("ADDRESS", ""))
         }
 
 
