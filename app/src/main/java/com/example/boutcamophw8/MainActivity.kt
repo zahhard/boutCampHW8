@@ -26,26 +26,27 @@ class MainActivity : AppCompatActivity() {
 
         Remember.isRemember = sharedPreferences.getBoolean("CHECKED", false)
 
-        if (Remember.isRemember) {
+       if (Remember.isRemember) {
 
             val intent = Intent(this, MainActivity2::class.java)
             startActivity(intent)
             finish()
         }
 
-        if (!Remember.isRemember){
-            binding.myEditTextName.setText(sharedPreferences.getString("NAME", ""))
-            binding.myEditTextCode.setText(sharedPreferences.getString("CODE", ""))
-            binding.myEditTextBirth.setText(sharedPreferences.getString("BIRTHPLACE", ""))
-            binding.myEditText1.setText(sharedPreferences.getString("ADDRESS", ""))
-            binding.myEditTextPost.setText(sharedPreferences.getString("POSTCODE", ""))
-        }
+//
+//        if (!Remember.isRemember){
+//            binding.myEditTextName.setText(sharedPreferences.getString("NAME", ""))
+//            binding.myEditTextCode.setText(sharedPreferences.getString("CODE", ""))
+//            binding.myEditTextBirth.setText(sharedPreferences.getString("BIRTHPLACE", ""))
+//            binding.myEditText1.setText(sharedPreferences.getString("ADDRESS", ""))
+//            binding.myEditTextPost.setText(sharedPreferences.getString("POSTCODE", ""))
+//        }
 
             binding.button.setOnClickListener {
                 codeTypeCheck()
                 checkEmptyView()
 
-                if (!codeTypeCheck() || !checkEmptyView()) {
+                if (!codeTypeCheck() && !checkEmptyView()) {
 
                     Remember.isRemember = true
 
@@ -55,6 +56,14 @@ class MainActivity : AppCompatActivity() {
                     editor.putString("POSTCODE", binding.myEditTextPost.text.toString())
                     editor.putString("BIRTHPLACE", binding.myEditTextBirth.text.toString())
                     editor.putString("ADDRESS", binding.myEditText1.text.toString())
+                    var gender = ""
+                    if (binding.men.isChecked){
+                        gender = "male"
+                    }
+                    else if (binding.weman.isChecked){
+                        gender = "female"
+                    }
+                    editor.putString("GENDER", gender)
                     editor.putBoolean("CHECKED", true)
                     editor.apply()
 
@@ -65,6 +74,17 @@ class MainActivity : AppCompatActivity() {
                     finish()
                 }
             }
+
+        if (sharedPreferences.contains("NAME"))
+            binding.myEditTextName.setText(sharedPreferences.getString("NAME", ""))
+        if (sharedPreferences.contains("CODE"))
+            binding.myEditTextCode.setText(sharedPreferences.getString("CODE", ""))
+        if (sharedPreferences.contains("POSTCODE"))
+            binding.myEditTextPost.setText(sharedPreferences.getString("POSTCODE", ""))
+        if (sharedPreferences.contains("BIRTHPLACE"))
+            binding.myEditTextBirth.setText(sharedPreferences.getString("BIRTHPLACE", ""))
+        if (sharedPreferences.contains("ADDRESS"))
+            binding.myEditText1.setText(sharedPreferences.getString("female", ""))
 
         }
 
