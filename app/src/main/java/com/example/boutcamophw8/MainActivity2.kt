@@ -21,6 +21,7 @@ class MainActivity2 : AppCompatActivity() {
 
         ppreferences = getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
 
+        Remember.isRemember = true
         binding.textView2.text = ppreferences.getString("NAME", "")
         binding.textView3.text = ppreferences.getString("CODE", "")
         binding.textView4.text = ppreferences.getString("BIRTHPLACE", "")
@@ -39,8 +40,10 @@ class MainActivity2 : AppCompatActivity() {
         }
 
         binding.button2.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
             Remember.isRemember = false
+            val editor: SharedPreferences.Editor = ppreferences.edit()
+            editor.putBoolean("checked", false)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }

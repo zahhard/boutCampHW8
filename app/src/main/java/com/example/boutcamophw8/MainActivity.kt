@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         sharedPreferences = getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
 
-       if (Remember.isRemember) {
+       if (sharedPreferences.getBoolean("checked", false)) {
             val intent = Intent(this, MainActivity2::class.java)
             startActivity(intent)
             finish()
@@ -35,11 +35,14 @@ class MainActivity : AppCompatActivity() {
 
                 if (!codeTypeCheck() && !checkEmptyView()) {
 
+                    Remember.isRemember = true
+
                     val editor: SharedPreferences.Editor = sharedPreferences.edit()
                     editor.putString("NAME", binding.myEditTextName.text.toString())
                     editor.putString("CODE", binding.myEditTextCode.text.toString())
                     editor.putString("POSTCODE", binding.myEditTextPost.text.toString())
                     editor.putString("BIRTHPLACE", binding.myEditTextBirth.text.toString())
+                    editor.putBoolean("checked", true)
                     editor.putString("ADDRESS", binding.myEditText1.text.toString())
                     var gender = ""
                     if (binding.men.isChecked){
@@ -51,8 +54,6 @@ class MainActivity : AppCompatActivity() {
                     editor.putString("GENDER", gender)
                     editor.putBoolean("CHECKED", true)
                     editor.apply()
-
-                    Remember.isRemember = true
 
                     Toast.makeText(this, "shared successfully", Toast.LENGTH_SHORT).show()
 
