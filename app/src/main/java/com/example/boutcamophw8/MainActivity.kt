@@ -73,7 +73,16 @@ class MainActivity : AppCompatActivity() {
             binding.myEditTextBirth.setText(sharedPreferences.getString("BIRTHPLACE", ""))
         if (sharedPreferences.contains("ADDRESS"))
             binding.myEditText1.setText(sharedPreferences.getString("ADDRESS", ""))
+        if (sharedPreferences.contains("GENDER")){
+            var gender = sharedPreferences.getString("GENDER", "")
+            if (gender == "male"){
+                binding.men.isChecked = true
+            }
+            else{
+                binding.weman.isChecked = true
+            }
         }
+    }
 
 
     private fun codeTypeCheck(): Boolean {
