@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         sharedPreferences = getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
 
-       if (sharedPreferences.getBoolean("checked", false)) {
+       if (Remember.isRemember) {
             val intent = Intent(this, MainActivity2::class.java)
             startActivity(intent)
             finish()
